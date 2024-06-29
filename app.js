@@ -11,6 +11,11 @@ function asignarTextoElemento(elemento, texto) {
     elementoHTML.innerHTML = texto;
 }
 
+function asignarTextoElementoId(id, texto) {
+    let elementoHTML = document.getElementById(id);
+    elementoHTML.innerHTML = texto;
+}
+
 function verificarIntento() {
 
     let numeroUsuario = parseInt(document.getElementById("valorUsuario").value);
@@ -44,6 +49,7 @@ function verificarIntento() {
 
         //Incrementamos los intentos cuando no se acierta
         intentos++;
+        asignarTextoElementoId("intento", ` ${intentos}`);
         palabraVeces = "veces";
 
         //condicional para evaluar el numero maximo de intentos
@@ -53,12 +59,13 @@ function verificarIntento() {
             document.getElementById("intentar").setAttribute("disabled", true);
             //habilitamos el boton de nuevo juego
             document.getElementById("reiniciar").removeAttribute("disabled");
+            //establecemos los intentos en 3
+            asignarTextoElementoId("intento", ` ${intentos = 3}`);
         }
     }
 }
 
 function limpiarCaja() {
-    //Limpiar la caja de texto
     let valorCaja = document.querySelector("#valorUsuario");
     valorCaja.value = "";
 }
@@ -101,7 +108,10 @@ function condicionesIniciales() {
         intentos = 1;
         palabraVeces = "vez";
         maxIntentos = 3;
-        asignarTextoElemento("span", ` ${maxIntentos}`);
+
+        // establecemos los valores inciales de los intentos en la vista del usuario
+        asignarTextoElementoId("intento", ` ${intentos}`);
+        asignarTextoElementoId("maxIntentos", ` ${maxIntentos}`);
 
     }
 }
